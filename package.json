@@ -1,0 +1,39 @@
+{
+  "name": "@web3-storage/ipfs-car2",
+  "type": "module",
+  "version": "0.0.0",
+  "license": "(Apache-2.0 AND MIT)",
+  "description": "Convert files to content-addressable archives (.car) and back",
+  "bin": {
+    "ipfs-car2": "bin.js"
+  },
+  "scripts": {
+    "lint": "standard",
+    "test": "ava --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/web3-storage/ipfs-car2.git"
+  },
+  "keywords": [
+    "ipfs",
+    "content-addressable",
+    "cid",
+    "car"
+  ],
+  "bugs": {
+    "url": "https://github.com/web3-storage/ipfs-car2/issues"
+  },
+  "homepage": "https://github.com/web3-storage/ipfs-car2#readme",
+  "devDependencies": {
+    "ava": "^5.1.0",
+    "standard": "^17.0.0"
+  },
+  "dependencies": {
+    "@ipld/dag-cbor": "^9.0.0",
+    "@ipld/unixfs": "github:alanshaw/js-unixfs#feat/sharded-directories",
+    "multiformats": "^11.0.2",
+    "sade": "^1.8.1",
+    "varint": "^6.0.0"
+  }
+}
