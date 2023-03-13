@@ -10,8 +10,4 @@ export interface FileLike extends BlobLike {
    * Name of the file. May include path information.
    */
   name: string
-  /**
-   * Size of the file in bytes.
-   */
-  size: number
 }

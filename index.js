@@ -1,6 +1,6 @@
 /* eslint-env browser */
 import fs from 'fs'
-import { Writable } from 'stream'
+import { Readable, Writable } from 'stream'
 import * as UnixFS from './unixfs.js'
 import { checkPathsExist, filesFromPaths } from './lib.js'
 import { CAREncoderStream } from './car.js'
@@ -16,8 +16,10 @@ import { CAREncoderStream } from './car.js'
 export async function pack (file, opts) {
   const paths = checkPathsExist([file, ...opts._].filter(Boolean))
   const hidden = !!opts.hidden
-  const files = await filesFromPaths(paths, { hidden })
-  const blockStream = files.length === 1 && opts['no-wrap']
+  const files = paths.length
+    ? await filesFromPaths(paths, { hidden })
+    : /** @type {import('./types').FileLike[]} */ ([{ name: 'stdin', stream: () => Readable.toWeb(process.stdin) }])
+  const blockStream = files.length === 1 && (files[0].name === 'stdin' || opts['no-wrap'])
     ? UnixFS.createFileEncoderStream(files[0])
     : UnixFS.createDirectoryEncoderStream(files)
   const carEncoderStream = new CAREncoderStream()
