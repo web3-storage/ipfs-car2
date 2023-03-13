@@ -37,12 +37,13 @@ export class CAREncoderStream extends TransformStream {
    */
   constructor (roots = []) {
     super({
-      start (controller) {
-        controller.enqueue(encodeHeader(roots))
-      },
-      transform (block, controller) {
+      start: (controller) => controller.enqueue(encodeHeader(roots)),
+      transform: (block, controller) => {
         controller.enqueue(encodeBlock(block))
+        this.finalBlock = block
       }
     })
+    /** @type {import('@ipld/unixfs').Block?} */
+    this.finalBlock = null
   }
 }

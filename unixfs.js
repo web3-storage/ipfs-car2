@@ -46,7 +46,7 @@ class UnixFsFileBuilder {
         }
       })
     )
-    return await unixfsFileWriter.close()
+    return unixfsFileWriter.close()
   }
 }
 
@@ -63,7 +63,7 @@ class UnixFSDirectoryBuilder {
       const link = await entry.finalize(writer)
       dirWriter.set(name, link)
     }
-    return await dirWriter.close()
+    return dirWriter.close()
   }
 }
 

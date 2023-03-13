@@ -22,20 +22,6 @@ export async function pack (file, opts) {
     : UnixFS.createDirectoryEncoderStream(files)
   const carEncoderStream = new CAREncoderStream()
   const outStream = Writable.toWeb(opts.output ? fs.createWriteStream(opts.output) : process.stdout)
-
-  /** @type {import('@ipld/unixfs').Block?} */
-  let lastBlock = null
-
-  await blockStream
-    .pipeThrough(new TransformStream({
-      transform (block, controller) {
-        lastBlock = block
-        controller.enqueue(block)
-      }
-    }))
-    .pipeThrough(carEncoderStream)
-    .pipeTo(outStream)
-
-  // @ts-ignore
-  console.error(lastBlock.cid.toString())
+  await blockStream.pipeThrough(carEncoderStream).pipeTo(outStream)
+  console.error(carEncoderStream.finalBlock?.cid.toString())
 }
