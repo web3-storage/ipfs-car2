@@ -32,8 +32,14 @@
   "dependencies": {
     "@ipld/dag-cbor": "^9.0.0",
     "@ipld/unixfs": "github:alanshaw/js-unixfs#feat/sharded-directories",
+    "files-from-path": "^1.0.0",
     "multiformats": "^11.0.2",
     "sade": "^1.8.1",
     "varint": "^6.0.0"
+  },
+  "standard": {
+    "ignore": [
+      "*.ts"
+    ]
   }
 }

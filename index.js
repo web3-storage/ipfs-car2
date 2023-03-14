@@ -1,8 +1,9 @@
 /* eslint-env browser */
 import fs from 'fs'
 import { Readable, Writable } from 'stream'
+import { filesFromPaths } from 'files-from-path'
 import * as UnixFS from './unixfs.js'
-import { checkPathsExist, filesFromPaths } from './lib.js'
+import { checkPathsExist } from './lib.js'
 import { CAREncoderStream } from './car.js'
 
 /**
